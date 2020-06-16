@@ -2,6 +2,9 @@ from test_framework import generic_test
 
 
 def count_bits(x: int) -> int:
+    # PROBLEM 4.0
+    # Brute Force
+
     num_bits = 0
     while x:
         num_bits += x & 1

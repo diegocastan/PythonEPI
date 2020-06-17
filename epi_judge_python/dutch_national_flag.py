@@ -9,7 +9,35 @@ RED, WHITE, BLUE = range(3)
 
 
 def dutch_flag_partition(pivot_index: int, A: List[int]) -> None:
-    # TODO - you fill in here.
+    pivot = A[pivot_index]
+
+    ## SOLUTION WITH ADDITIONAL SPACE O(n) -- not accepted
+
+    # minor = []
+    # equal = []
+    # greater = []
+    # for ele in A:
+    #     if ele < pivot:
+    #         minor.append(ele)
+    #     elif ele > pivot:
+    #         greater.append(ele)
+    #     else:
+    #         equal.append(ele)
+    # A = minor + equal + greater
+
+    ## SOLUTION WITH SPACE COMPLEXITY O(1) AND COMPUTATIONAL COMPLEXITY O(2N)
+    # smaller elements
+    ini = 0
+    for i in range(len(A)):
+        if A[i] < pivot:
+            A[ini], A[i] = A[i], A[ini]
+            ini += 1
+    # greater elements
+    end = len(A)-1
+    for i in reversed(range(len(A))):
+        if A[i] > pivot:
+            A[end], A[i] = A[i], A[end]
+            end -= 1
     return
 
 
@@ -44,3 +72,8 @@ if __name__ == '__main__':
         generic_test.generic_test_main('dutch_national_flag.py',
                                        'dutch_national_flag.tsv',
                                        dutch_flag_partition_wrapper))
+    # A = [1, 0, 2, 0, 2, 1, 2, 1, 2, 0, 0, 0, 1, 0, 2, 1, 0, 2, 0, 1, 0, 2, 1, 0, 2, 1, 2, 0, 2, 1, 1, 2, 2, 0, 1, 1, 0, 1, 1, 1, 2, 1, 0, 1, 2, 1, 2, 1, 2, 2, 2, 0, 1, 0, 1, 1, 2, 1, 1, 2, 2, 1, 1, 1, 0, 2, 0, 1, 2, 1, 1, 1, 0, 2, 0, 1, 2, 1, 1, 2, 1, 2, 2, 1, 0, 1, 2, 2, 1, 2, 2, 1, 1, 2, 0, 1, 0, 1, 2, 0, 2, 1, 2, 1, 1, 1, 2, 2, 2, 0, 0, 0, 1, 2, 0, 0, 0, 0]
+    # pivot_idx = 101
+    # A = [1, 1, 0, 2]
+    # pivot_idx = 1
+    # dutch_flag_partition(pivot_idx,A)

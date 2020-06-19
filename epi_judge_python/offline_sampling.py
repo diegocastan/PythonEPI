@@ -10,6 +10,11 @@ from test_framework.test_utils import enable_executor_hook
 
 def random_sampling(k: int, A: List[int]) -> None:
     # TODO - you fill in here.
+    import random
+
+    for i in range(0,len(A)-k):
+        idx = random.randint(0,len(A)-1)
+        del A[idx]
     return
 
 
